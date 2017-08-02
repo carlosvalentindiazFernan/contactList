@@ -1,15 +1,18 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="addContact.html">
-<link rel="import" href="contactDetail.html">
+<link rel="import" href="contact-detail.html">
 <link rel="import" href="contactList.html">
 
 <dom-module id="contact-container">
   <template>
       <h1>Container</h1>
+
       <add-contact></add-contact>
+      <contact-detail></contactact-detail>
+
   </template>
   <script>
-  (function contactcontainer() {
+  (function contactcontainer(customElements) {
 
     class ContactListContainer extends Polymer.Element{
 
@@ -19,7 +22,7 @@
 
     customElements.define(ContactListContainer.is,ContactListContainer);
 
-  })();
+  })(window.customElements);
 
 
     </script>
