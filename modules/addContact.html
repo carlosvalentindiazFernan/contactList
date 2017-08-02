@@ -27,7 +27,10 @@
          <div slot="suffix">@email.com</div>
        </paper-input>
        <paper-input id="phone" label="Telefono" type="text" value="{{phoneVal}}"></paper-input>
+       <paper-input id="address" label="Direccion" type="text" value="{{addressVal}}"></paper-input>
+
        <paper-textarea id="aboutme" label="Aceca de mi" value="{{aboutmeVal}}"></paper-textarea>
+
 
 
    	  <div class="buttons">
@@ -56,10 +59,11 @@
           nameval : String,
           lastnameVal: String,
           emailVal: String,
-          phone: String,
-          aboutme: String,
+          phoneVal: String,
+          aboutmeVal: String,
+          addressVal: String,
 
-          objEnvio:{
+          objProfile:{
             type: Object,
             notify: true
           }
@@ -80,15 +84,26 @@
         let objectUser = {};
 
         objectUser.name = this.$.name.value;
-        objectUser.LastName  = this.$.lastname.value;
+        objectUser.lastName  = this.$.lastname.value;
         objectUser.email = this.$.email.value;
-        objectUser.phone = this.$.phone.value;
-        objectUser.aboutme = this.$.aboutme.value;
+        objectUser.telephone = this.$.phone.value;
+        objectUser.address = this.$.address.value;
+        objectUser.bio = this.$.aboutme.value;
+
+        this.objProfile = objectUser;
+
+         this.dispatchEvent(new
+           CustomEvent(`on-contact-changed`,{
+             bubbles: true, composed: true,
+             detail:this.objProfile
+
+          }));
+
+
 
 //        console.log(objectUser);
 
-        this.objEnvio = objectUser;
-        console.log(this.get('objEnvio'));
+        console.log(this.get('objProfile' ));
         this._cleanInput();
       }
 
