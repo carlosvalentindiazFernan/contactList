@@ -6,7 +6,7 @@
 
 <dom-module id="contact-container">
   <template>
-<<<<<<< HEAD
+
   
     <style>
       .principal{
@@ -42,13 +42,6 @@
         <contact-detail contact="[[contact]]"></contact-detail>
       </div>
     </div>
-=======
-      <h1>Container</h1>
-
-
-      <contact-detail></contactact-detail>
-
->>>>>>> development
   </template>
   <script>
   (function contactcontainer(customElements) {
@@ -62,8 +55,8 @@
           contacts:{
             type:Array,
             value:[
-              {name:`Margarito`, telephone:`555-444-4444`, address:`calle conocida, s/n, ciudad esta ciudad`, email:`usuario@correo.comx`},
-              {name:`Juan`, telephone:`555-232-3322`, address:`calle no conocida, 6969, ciudad otra ciudad ciudad`, email:`otrousuario@correo.comx`}
+              {name:`Margarito`, lastName:`Mancilla `, telephone:`555-444-4444`,bio:`asdasdasdasdasdasdasdasdasdasdqas`, address:`calle conocida, s/n, ciudad esta ciudad`, email:`usuario@correo.com`},
+              {name:`Juan`, lastName:`Perez Moran`,telephone:`555-232-3322`, bio:`Texto de prueba xD ......`, address:`calle no conocida, 6969, ciudad otra ciudad ciudad`, email:`otrousuario@correo.comx`}
             ]
           },
           contact:{
@@ -77,6 +70,7 @@
       connectedCallback(){
         super.connectedCallback();
         this.addEventListener(`on-index-changed`, this._indexChanged)
+        this.contact = this.contacts[0];
       }
 
       _indexChanged(e)
