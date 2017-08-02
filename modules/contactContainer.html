@@ -2,11 +2,53 @@
 <link rel="import" href="addContact.html">
 <link rel="import" href="contact-detail.html">
 <link rel="import" href="contactList.html">
+<link rel="import" href="barra-buscar.html">
 
 <dom-module id="contact-container">
   <template>
+<<<<<<< HEAD
+  
+    <style>
+      .principal{
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      .principal div:first-child{
+        width: 20%;
+        height: 500px;
+        background-color: gray;
+        color:#ffffff;
+        float: left;
+      }
+
+      .principal div:last-child{
+        width: 80%;
+        height: 500px;
+        background-color: darkgray;
+        color:#ffffff;
+        float: right;
+      }
+
+    </style>
+
+    <div class="principal">
+      <div>
+        <add-contact></add-contact>
+        <barra-buscar></barra-buscar>
+        <contact-list contacts="[[contacts]]"></contact-list>
+      </div>
+      <div>
+        <contact-detail contact="[[contact]]"></contact-detail>
+      </div>
+    </div>
+=======
       <h1>Container</h1>
+
+
       <contact-detail></contactact-detail>
+
+>>>>>>> development
   </template>
   <script>
   (function contactcontainer(customElements) {
@@ -14,6 +56,34 @@
     class ContactListContainer extends Polymer.Element{
 
       static get is (){return "contact-container"}
+
+      static get properties(){
+        return {
+          contacts:{
+            type:Array,
+            value:[
+              {name:`Margarito`, telephone:`555-444-4444`, address:`calle conocida, s/n, ciudad esta ciudad`, email:`usuario@correo.comx`},
+              {name:`Juan`, telephone:`555-232-3322`, address:`calle no conocida, 6969, ciudad otra ciudad ciudad`, email:`otrousuario@correo.comx`}
+            ]
+          },
+          contact:{
+            type:Object,
+            value:{},
+            notify:true
+          }
+        }
+      }
+
+      connectedCallback(){
+        super.connectedCallback();
+        this.addEventListener(`on-index-changed`, this._indexChanged)
+      }
+
+      _indexChanged(e)
+      {
+        console.log(`evento cachado ${e.detail.index}`)
+        this.contact = this.contacts[e.detail.index];
+      }
 
     }
 

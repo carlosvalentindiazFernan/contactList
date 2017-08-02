@@ -1,9 +1,12 @@
 {
-  "name": "Contact List",
-  "private": true,
-  "dependencies": {
-    "Polymer/polymer": "#2.0.2",
-    "slate-font-awesome": "JeffLeFoll/slate-font-awesome#^4.7.3",
-    "iron-icons": "PolymerElements/iron-icons#^2.0.1"
-  }
+	"name":"Contact List",
+	"private":true,
+	"dependencies":{
+		"Polymer/polymer":"#2.0.2",
+		"paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
+		"paper-button": "PolymerElements/paper-button#^2.0.0",
+		"paper-input": "PolymerElements/paper-input#^2.0.0",
+		"paper-fab": "PolymerElements/paper-fab#^2.0.0",
+		"iron-icons": "PolymerElements/iron-icons#^2.0.1"
+	}
 }

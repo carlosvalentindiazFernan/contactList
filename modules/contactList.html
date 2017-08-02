@@ -1,15 +1,40 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
 
 <dom-module id="contact-list">
   <template>
-      <h1>ContactList</h1>
+      <style>
+        .item{
+          display: block;
+        }
+      </style>
+      <h2>Contactos</h2>
+      <template is="dom-repeat" items="[[contacts]]" as="contact">
+        <paper-item class="item" index="[[index]]" on-tap="index_changed">[[contact.name]]</paper-item>
+      </template>
   </template>
   <script>
   (function contactlist() {
 
-    class ContactList extends Polymer.Element{
+    class ContactList extends Polymer.GestureEventListeners(Polymer.Element){
 
       static get is (){return "contact-list"}
+
+      static get properties(){
+        return{
+          contacts:{
+            type:Array,
+            value:[]
+          }
+        }
+      }
+
+      index_changed(e){
+        console.log(`evento a lanzar`);
+        this.dispatchEvent(new CustomEvent('on-index-changed', {bubbles:true, composed:true, detail:{index:e.currentTarget.index}}));
+
+      }
 
     }
 

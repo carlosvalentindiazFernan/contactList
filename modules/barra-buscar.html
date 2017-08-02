@@ -1,0 +1,41 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<dom-module id="barra-buscar"> 
+	<template>
+		<paper-input label="introducir el nombre un contacto" value="[[filtro]]"></paper-input>
+		<paper-button on-click="_filtrar">Buscar</paper-button>
+	</template>
+	<script>
+		(function (){
+			'use strict';
+
+			class BarraBuscar extends Polymer.Element{
+				static get is(){return `barra-buscar`;}
+
+				static get properties(){
+
+					return	{
+						filtro:{
+							type:String,
+							value:`Buscar`,
+							observer:'_textoCambio'
+						}
+					}
+				}
+
+				_textoCambio(valor){
+
+					console.log(`entro`);
+				}
+
+				_filtrar(e){
+					console.log(this.filtro);
+				}
+
+			}
+			customElements.define(BarraBuscar.is, BarraBuscar);
+		})()
+	</script>
+</dom-module>
