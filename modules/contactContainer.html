@@ -1,0 +1,25 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="addContact.html">
+<link rel="import" href="contactDetail.html">
+<link rel="import" href="contactList.html">
+
+<dom-module id="contact-container">
+  <template>
+      <h1>Container</h1>
+  </template>
+  <script>
+  (function contactcontainer() {
+
+    class ContactListContainer extends Polymer.Element{
+
+      static get is (){return "contact-container"}
+
+    }
+
+    customElements.define(ContactListContainer.is,ContactListContainer);
+
+  })();
+
+
+    </script>
+</dom-module>
