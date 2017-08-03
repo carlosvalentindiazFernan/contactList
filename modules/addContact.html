@@ -24,14 +24,14 @@
     <paper-fab icon="add"  raised on-click="_openDialog"></paper-fab>
         <paper-dialog id="dialog" modal>
       <h2>Agregar contacto</h2>
-      <paper-input class="control" id="name" pattern="^[A-Za-z ]+$" auto-validate error-message="Solo letras" label="Nombre(s)"></paper-input>
-      <paper-input class="control" id="lastname" label="Apellidos"></paper-input>
-      <paper-input class="control" id="email" label="Correo">
+      <paper-input class="control" id="name"  label="Nombre" pattern="^[A-Za-z ]+$" required auto-validate error-message="Nombre(s) necesario!"></paper-input>
+      <paper-input class="control" id="lastname" label="Apellidos" required auto-validate error-message="Apellido necesario!"></paper-input>
+      <paper-input class="control" id="email" label="Correo" required auto-validate error-message="Correo necesario!">
         <div slot="suffix">@email.com</div>
       </paper-input>
-      <paper-input class="control" id="phone" label="Telefono" type="text"></paper-input>
-      <paper-input class="control" id="address" label="Direccion" type="text"></paper-input>
-      <paper-textarea id="aboutme" label="Aceca de mi"></paper-textarea>
+      <paper-input class="control" id="phone" label="Telefono" type="text" required auto-validate error-message="Telefono necesario!"></paper-input>
+      <paper-input class="control" id="address" label="Direccion" type="text" required auto-validate error-message="Direccion necesaio!"></paper-input>
+      <paper-textarea id="aboutme" label="Aceca de mi" required auto-validate error-message="Acerca de mi necesario!"></paper-textarea>
       <div class="buttons">
         <paper-button dialog-dismiss on-tap="_cleanInput">Cancelar</paper-button>
         <paper-button dialog-confirm autofocus on-tap="_saveUser">Guardar</paper-button>
