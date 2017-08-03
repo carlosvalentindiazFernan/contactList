@@ -10,35 +10,34 @@
 <dom-module id="add-contact">
   <template>
     <style>
-    paper-fab{
-      position:absolute;
-      right:10%;
-      bottom:10%;
-      z-index:0;
-    }
+      paper-fab{
+        position: relative;
+        left: 973px;
+        top: 513px;
+        z-index: 0;
+      }
+      .control{
+        height: 50px;
+      }
     </style>
+
     <paper-fab icon="add"  raised on-click="_openDialog"></paper-fab>
+        <paper-dialog id="dialog" modal>
+      <h2>Agregar contacto</h2>
+      <paper-input class="control" id="name" pattern="^[A-Za-z ]+$" auto-validate error-message="Solo letras" label="Nombre(s)"></paper-input>
+      <paper-input class="control" id="lastname" label="Apellidos"></paper-input>
+      <paper-input class="control" id="email" label="Correo">
+        <div slot="suffix">@email.com</div>
+      </paper-input>
+      <paper-input class="control" id="phone" label="Telefono" type="text"></paper-input>
+      <paper-input class="control" id="address" label="Direccion" type="text"></paper-input>
+      <paper-textarea id="aboutme" label="Aceca de mi"></paper-textarea>
+      <div class="buttons">
+        <paper-button dialog-dismiss on-tap="_cleanInput">Cancelar</paper-button>
+        <paper-button dialog-confirm autofocus on-tap="_saveUser">Guardar</paper-button>
+      </div>
+    </paper-dialog>
 
-     <paper-dialog id="dialog">
-       <h2>Agregar contacto</h2>
-       <paper-input id="name" label="Nombre(s)" value="{{nameVal}}"></paper-input>
-       <paper-input id="lastname"  label="Apellidos" value="{{lastnameVal}}"></paper-input>
-       <paper-input id="email" label="Correo" value="{{emailVal}}">
-         <div slot="suffix">@email.com</div>
-       </paper-input>
-       <paper-input id="phone" label="Telefono" type="text" value="{{phoneVal}}"></paper-input>
-       <paper-input id="address" label="Direccion" type="text" value="{{addressVal}}"></paper-input>
-
-       <paper-textarea id="aboutme" label="Aceca de mi" value="{{aboutmeVal}}"></paper-textarea>
-
-
-
-   	  <div class="buttons">
-   	    <paper-button dialog-dismiss on-tap="_cleanInput">Cancelar</paper-button>
-   	    <paper-button dialog-confirm autofocus on-tap="_saveUser">Guardar</paper-button>
-   	  </div>
-
-   	</paper-dialog>
 
   </template>
   <script>
@@ -53,31 +52,13 @@
         this.$.dialog.open();
       }
 
-      static get properties(){
-        return{
-
-          nameval : String,
-          lastnameVal: String,
-          emailVal: String,
-          phoneVal: String,
-          aboutmeVal: String,
-          addressVal: String,
-
-          objProfile:{
-            type: Object,
-            notify: true
-          }
-
-        };
-      }
-
       _cleanInput(){
         this.$.name.value ="";
         this.$.lastname.value ="";
         this.$.email.value ="";
         this.$.phone.value ="";
         this.$.aboutme.value ="";
-
+        this.$.address = "";
       }
 
       _saveUser(){
@@ -90,21 +71,12 @@
         objectUser.address = this.$.address.value;
         objectUser.bio = this.$.aboutme.value;
 
-        this.objProfile = objectUser;
-
          this.dispatchEvent(new
            CustomEvent(`contact-changed`,{
              bubbles: true, composed: true,
-             detail:this.objProfile
+             detail:objectUser
 
           }));
-
-
-
-//        console.log(objectUser);
-
-        console.log(this.get('objProfile' ));
-        this._cleanInput();
       }
 
     }

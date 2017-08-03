@@ -10,9 +10,11 @@
         }
       </style>
       <h2>Contactos</h2>
-      <template is="dom-repeat" items="[[contacts]]" as="contact">
-        <paper-item class="item" index="[[index]]" on-tap="index_changed">[[contact.name]]</paper-item>
+      <div id="contactListDiv">
+      <template is="dom-repeat" items="[[contacts]]" filter="_contactsFilter" observer="type name" as="contact">
+        <paper-item class="item" index="[[contact.index]]" on-tap="_indexChanged">[[contact.name]]</paper-item>
       </template>
+      </div>
   </template>
   <script>
   (function contactlist() {
@@ -26,14 +28,24 @@
           contacts:{
             type:Array,
             value:[]
+          },
+          filter:{
+            type:String,
+            value:``
           }
         }
       }
 
-      index_changed(e){
-        console.log(`evento a lanzar`);
-        this.dispatchEvent(new CustomEvent('index-changed', {bubbles:true, composed:true, detail:{index:e.currentTarget.index}}));
+      _contactsFilter(contact){
+        if (this.filter !== ``){
+            return contact.name === this.filter;
+        }
+        return true;
+      }
 
+      _indexChanged(e){
+        console.log(e.currentTarget.index)
+        this.dispatchEvent(new CustomEvent('index-changed', {bubbles:true, composed:true, detail:{index:e.currentTarget.index}}));
       }
 
     }

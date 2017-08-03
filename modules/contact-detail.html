@@ -9,6 +9,7 @@
       <style>
         .contact-container {
           width: 100%;
+          height: 90%;
           border: 1px solid black;
           background-color: var(--contact-background-component,#FFFFFF);
           color:var(--contact-component-font-color,#616161);
@@ -111,7 +112,7 @@
           </div>
 
           <div class="img-container">
-              <img class="image" src="[[contact.image]]" alt="image profile">
+              <img class="image" src$="[[contact.image]]" alt="image profile">
           </div>
 
             <strong class="contact-name">
@@ -157,7 +158,9 @@
           contact:{
             type:Object,
             value:{},
-            observer:'_contactChanged'
+            notify:true,
+            reflectToAttribute:true
+            ,observer:'_contactChanged'
           },
 
           fullName:{

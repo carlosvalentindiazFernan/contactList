@@ -10,13 +10,14 @@
   
     <style>
       .principal{
-        width: 1000px;
+        height: 600px;
         margin: 0 auto;
+        width: 1000px;
       }
 
       .principal div:first-child{
         width: 20%;
-        height: 500px;
+        height: 100%;
         background-color: #3f51b5;
         color:#ffffff;
         float: left;
@@ -24,7 +25,7 @@
 
       .principal div:last-child{
         width: 80%;
-        height: 500px;
+        height: 100%;
         background-color: #3f51b5;
         color:#ffffff;
         float: right;
@@ -35,8 +36,8 @@
     <div class="principal">
       <div>
         <add-contact on-contact-changed="_contactChanged"></add-contact>
-        <barra-buscar></barra-buscar>
-        <contact-list on-index-changed="_indexChanged" contacts="[[contacts]]"></contact-list>
+        <barra-buscar on-filter-user="_filterUser"></barra-buscar>
+        <contact-list on-index-changed="_indexChanged" filter="[[filter]]" contacts="[[contacts]]"></contact-list>
       </div>
       <div>
         <contact-detail contact="[[contact]]"></contact-detail>
@@ -55,33 +56,54 @@
           contacts:{
             type:Array,
             value:[
-              {name:`Margarito`, lastName:`Mancilla `, telephone:`555-444-4444`,bio:`asdasdasdasdasdasdasdasdasdasdqas`, address:`calle conocida, s/n, ciudad esta ciudad`, email:`usuario@correo.com`},
-              {name:`Juan`, lastName:`Perez Moran`,telephone:`555-232-3322`, bio:`Texto de prueba xD ......`, address:`calle no conocida, 6969, ciudad otra ciudad ciudad`, email:`otrousuario@correo.comx`}
+              {index: 0,name:`Margarito`, lastName:`Mancilla `, telephone:`555-444-4444`,bio:`asdasdasdasdasdasdasdasdasdasdqas`, address:`calle conocida, s/n, ciudad esta ciudad`, email:`usuario@correo.com`},
+              {index:1,name:`Juan`, lastName:`Perez Moran`,telephone:`555-232-3322`, bio:`Texto de prueba xD ......`, address:`calle no conocida, 6969, ciudad otra ciudad ciudad`, email:`otrousuario@correo.comx`}
             ]
           },
           contact:{
             type:Object,
             value:{},
             notify:true
+          },
+          filter:{
+            type:String,
+            value:``
+          },
+          index:{
+            type:Number,
+            value:0
           }
         }
       }
 
-      connectedCallback(){
-        super.connectedCallback();
+      ready(){
+        super.ready();
         this.contact = this.contacts[0];
       }
 
+      _filterUser(e){
+
+        this.filter = e.detail.filter;
+
+        let contacts = this.contacts;
+        this.contacts = null;
+        this.contacts = contacts;
+
+        this.contact = {index: 0,name:``, lastName:``, telephone:``,bio:``, address:``, email:``};
+      }
+
+      _indexChanged(e){
+        this.index = e.detail.index;
+        let element =this.contacts[e.detail.index];
+        this.contact = element;
+      }
+
       _contactChanged(e){
-          console.log(`_contactChanged ${e.detail.name}`)
+          let elementAdd = e.detail;
+          elementAdd.index = this.contacts.length;
+          console.log(this.get(e.detail));
+          this.push(`contacts`, elementAdd)
       }
-
-      _indexChanged(e)
-      {
-        console.log(`_indexChanged ${e.detail.index}`)
-        this.contact = this.contacts[e.detail.index];
-      }
-
     }
 
     customElements.define(ContactListContainer.is,ContactListContainer);
