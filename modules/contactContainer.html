@@ -13,7 +13,7 @@
         width: 80%;
         margin: 0 auto;
       }
-
+/*
       .principal div:first-child{
         width: 20%;
         height: 500px;
@@ -28,7 +28,7 @@
         background-color: darkgray;
         color:#ffffff;
         float: right;
-      }
+      }*/
 
     </style>
 
@@ -62,21 +62,28 @@
           contact:{
             type:Object,
             value:{},
-            notify:true
-          }
+            
+          },
+
         }
       }
 
-      connectedCallback(){
+
+      
+      connectedCallback() {
         super.connectedCallback();
-        this.addEventListener(`on-index-changed`, this._indexChanged)
+        this.addEventListener(`on-index-changed`, this._indexChanged);
+        this.addEventListener('contact-changed',this._pushData);
         this.contact = this.contacts[0];
       }
 
-      _indexChanged(e)
-      {
-        console.log(`evento cachado ${e.detail.index}`)
-        this.contact = this.contacts[e.detail.index];
+      _pushData(event) {
+        this.push('contacts',event.detail);
+      }
+
+      _indexChanged(event) {
+        console.log(event.detail)
+        this.contact = this.contacts[event.detail.index];
       }
 
     }
