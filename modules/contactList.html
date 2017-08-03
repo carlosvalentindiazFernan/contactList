@@ -32,7 +32,7 @@
 
       index_changed(e){
         console.log(`evento a lanzar`);
-        this.dispatchEvent(new CustomEvent('on-index-changed', {bubbles:true, composed:true, detail:{index:e.currentTarget.index}}));
+        this.dispatchEvent(new CustomEvent('index-changed', {bubbles:true, composed:true, detail:{index:e.currentTarget.index}}));
 
       }
 

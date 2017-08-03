@@ -17,7 +17,7 @@
       .principal div:first-child{
         width: 20%;
         height: 500px;
-        background-color: gray;
+        background-color: #3f51b5;
         color:#ffffff;
         float: left;
       }
@@ -25,7 +25,7 @@
       .principal div:last-child{
         width: 80%;
         height: 500px;
-        background-color: darkgray;
+        background-color: #3f51b5;
         color:#ffffff;
         float: right;
       }
@@ -34,9 +34,9 @@
 
     <div class="principal">
       <div>
-        <add-contact></add-contact>
+        <add-contact on-contact-changed="_contactChanged"></add-contact>
         <barra-buscar></barra-buscar>
-        <contact-list contacts="[[contacts]]"></contact-list>
+        <contact-list on-index-changed="_indexChanged" contacts="[[contacts]]"></contact-list>
       </div>
       <div>
         <contact-detail contact="[[contact]]"></contact-detail>
@@ -69,13 +69,16 @@
 
       connectedCallback(){
         super.connectedCallback();
-        this.addEventListener(`on-index-changed`, this._indexChanged)
         this.contact = this.contacts[0];
+      }
+
+      _contactChanged(e){
+          console.log(`_contactChanged ${e.detail.name}`)
       }
 
       _indexChanged(e)
       {
-        console.log(`evento cachado ${e.detail.index}`)
+        console.log(`_indexChanged ${e.detail.index}`)
         this.contact = this.contacts[e.detail.index];
       }
 
